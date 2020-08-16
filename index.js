@@ -1,3 +1,21 @@
+const {readFileSync} = require('fs');
 const importJsx = require('import-jsx');
 
-importJsx('./MartianRobot');
+const parseFile = require('./parseFile');
+
+const arg = process.argv[2];
+let filename;
+
+if (!arg) {
+    filename = 'sample.txt';
+}
+
+try {
+    let content = readFileSync(filename).toString();
+
+    parseFile(content);
+} catch (err) {
+    console.error(`Cannot read file: ${err}`);
+}
+
+importJsx('./MartianRobot.jsx');
