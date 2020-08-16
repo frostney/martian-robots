@@ -1,0 +1,18 @@
+{
+  "name": "martian-robots",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/frostney/martian-robots.git",
+  "license": "MIT",
+  "dependencies": {
+    "import-jsx": "^4.0.0",
+    "ink": "^3.0.3",
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "gitmoji-commiteur": "^1.1.0"
+  },
+  "scripts": {
+    "commit": "gitmoji-commiteur"
+  }
+}
