@@ -7,12 +7,14 @@
   "dependencies": {
     "import-jsx": "^4.0.0",
     "ink": "^3.0.3",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1"
   },
   "devDependencies": {
     "gitmoji-commiteur": "^1.1.0"
   },
   "scripts": {
+    "start": "node index.js",
     "commit": "gitmoji-commiteur"
   }
 }

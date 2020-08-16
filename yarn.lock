@@ -981,6 +981,7 @@ __metadata:
     gitmoji-commiteur: ^1.1.0
     import-jsx: ^4.0.0
     ink: ^3.0.3
+    prop-types: ^15.7.2
     react: ^16.13.1
   languageName: unknown
   linkType: soft
@@ -1141,7 +1142,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
