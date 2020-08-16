@@ -1,9 +1,35 @@
 {
   "name": "martian-robots",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/frostney/martian-robots.git",
   "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "commit": "gitmoji-commiteur",
+    "dev": "DEV=true node index.js",
+    "format-all": "prettier --write .",
+    "lint": "eslint --fix .",
+    "start": "node index.js",
+    "test": "exit 0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.jsx?": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{md,json,yml}": [
+      "prettier --write",
+      "git add"
+    ],
+    "package.json": "scriptlint"
+  },
   "dependencies": {
     "import-jsx": "^4.0.0",
     "ink": "^3.0.3",
@@ -11,10 +37,18 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "gitmoji-commiteur": "^1.1.0"
-  },
-  "scripts": {
-    "start": "node index.js",
-    "commit": "gitmoji-commiteur"
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "4.0.0",
+    "gitmoji-commiteur": "^1.1.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "prettier-plugin-packagejson": "^2.2.5",
+    "scriptlint": "^2.1.1"
   }
 }
