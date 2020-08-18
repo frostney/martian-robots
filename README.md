@@ -30,3 +30,7 @@ Then run `yarn start` to run the simulation. It uses `sample.txt` by default, bu
 - Can context help with prop drilling? Does it even make sense given it's not that deep?
 - More unit tests
 - Error handling
+
+## License
+
+MIT
