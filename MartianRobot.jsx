@@ -1,19 +1,44 @@
 const React = require('react');
-const { render, Box, useApp } = require('ink');
+const PropTypes = require('prop-types');
+const { Box } = require('ink');
+const importJsx = require('import-jsx');
 
-const { useEffect } = React;
+const Tilemap = importJsx('./components/Tilemap.jsx');
+const Sidebar = importJsx('./components/Sidebar.jsx');
 
-const MartianRobot = () => {
-  const { exit } = useApp();
+const { useEffect, useState } = React;
 
-  // Exit the app after 5 seconds
+const MartianRobot = ({ tiles, robots }) => {
+  const [currentRobot, setCurrentRobot] = useState(0);
+  console.log(currentRobot);
+
   useEffect(() => {
-    setTimeout(() => {
-      exit();
-    }, 5000);
+    robots.forEach((robot, i) => {
+      setCurrentRobot(i);
+      robot.actions.forEach((action, j) => {
+        setTimeout(() => {
+          console.log(action);
+        }, 500 * j);
+      });
+    });
   }, []);
 
-  return <Box />;
+  return (
+    <Box>
+      <Tilemap tiles={tiles} />
+      <Sidebar />
+    </Box>
+  );
 };
 
-render(<MartianRobot />);
+MartianRobot.propTypes = {
+  tiles: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+  robots: PropTypes.arrayOf(PropTypes.object),
+};
+
+MartianRobot.defaultProps = {
+  tiles: [],
+  robots: [],
+};
+
+module.exports = MartianRobot;

@@ -3,7 +3,7 @@ const { Box, Text } = require('ink');
 
 const Sidebar = () => {
   return (
-    <Box>
+    <Box borderStyle="round">
       <Text>Output</Text>
     </Box>
   );
