@@ -53,7 +53,14 @@ const parseFile = (content) => {
   lines.shift();
 
   for (let i = 0; i < lines.length - 1; i += 2) {
+    const count = i / 2;
     const [x, y, direction] = splitCoordinateWithDirection(lines[i]);
+    robots.push({
+      type: 'SET_ROBOT',
+      payload: [x, y, direction],
+      count,
+    });
+
     const actions = lines[i + 1]
       .split('')
       .map((action) => {
@@ -62,29 +69,26 @@ const parseFile = (content) => {
             return {
               type: ROTATE,
               payload: LEFT,
+              count,
             };
           case 'R':
-            return { type: ROTATE, payload: RIGHT };
+            return { type: ROTATE, payload: RIGHT, count };
           case 'F':
-            return { type: MOVE, payload: FORWARD };
+            return { type: MOVE, payload: FORWARD, count };
           default:
-            return '';
+            return null;
         }
       })
       .filter((item) => item);
 
-    robots.push({
-      x,
-      y,
-      direction,
-      actions,
-    });
+    robots.push(...actions);
   }
 
   return {
     gridWidth,
     gridHeight,
     robots,
+    robotCount: lines.length / 2,
   };
 };
 

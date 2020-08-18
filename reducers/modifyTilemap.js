@@ -1,4 +1,4 @@
-const { ROTATE, MOVE, SET_ROBOT } = require('./constants');
+const { ROTATE, MOVE, SET_ROBOT } = require('../constants');
 
 const modifyTilemap = ({ tiles, currentRobot }, action) => {
   switch (action.type) {

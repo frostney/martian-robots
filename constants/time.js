@@ -1,0 +1,1 @@
+exports.DELAY = 500;

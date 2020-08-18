@@ -4,6 +4,7 @@ const importJsx = require('import-jsx');
 
 const { readFileSync } = require('fs');
 
+const { DELAY } = require('./constants');
 const parseFile = require('./parseFile');
 const createTilemap = require('./createTilemap');
 
@@ -17,7 +18,7 @@ let filename;
 
 let tiles = [];
 let robots = [];
-let timeout = 3000;
+let timeout = DELAY * 5;
 
 if (!arg) {
   filename = 'sample.txt';
@@ -30,9 +31,7 @@ try {
   const { gridWidth, gridHeight } = parsedFile;
   robots = parsedFile.robots;
   tiles = createTilemap(gridWidth, gridHeight);
-  timeout = robots.reduce((acc, curr) => {
-    return acc + curr.actions.length * 500;
-  }, 0);
+  timeout = robots.length * DELAY;
 } catch (err) {
   console.error(`Cannot read file: ${err}`);
 }
