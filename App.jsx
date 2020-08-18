@@ -6,7 +6,7 @@ const { readFileSync } = require('fs');
 
 const { DELAY } = require('./constants');
 const parseFile = require('./parseFile');
-const createTilemap = require('./createTilemap');
+const { createTilemap } = require('./utils');
 
 const MartianRobot = importJsx('./MartianRobot.jsx');
 
@@ -45,7 +45,7 @@ const App = () => {
     }, timeout);
   }, []);
 
-  return <MartianRobot tiles={tiles} actions={actions} />;
+  return <MartianRobot initialTiles={tiles} actions={actions} />;
 };
 
 render(<App />);

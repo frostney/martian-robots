@@ -3,7 +3,7 @@ const { Box } = require('ink');
 const PropTypes = require('prop-types');
 const importJsx = require('import-jsx');
 
-const Robot = importJsx('./Robot');
+const Robot = importJsx('./Robot.jsx');
 const Scent = importJsx('./Scent.jsx');
 const Default = importJsx('./Default.jsx');
 

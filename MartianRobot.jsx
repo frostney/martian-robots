@@ -11,9 +11,10 @@ const Sidebar = importJsx('./components/Sidebar.jsx');
 
 const { useEffect, useState } = React;
 
-const MartianRobot = ({ tiles, actions }) => {
+const MartianRobot = ({ initialTiles, actions }) => {
   const [robots, setRobots] = useState({});
   const [command, setCommand] = useState('');
+  const [tiles, setTiles] = useState(initialTiles);
   // console.log(robots);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const MartianRobot = ({ tiles, actions }) => {
           ...currentValue,
           [action.count]: updateRobot(currentValue[action.count], action),
         }));
+        setTiles(tiles);
       }, DELAY * j);
     });
   }, []);
@@ -37,12 +39,12 @@ const MartianRobot = ({ tiles, actions }) => {
 };
 
 MartianRobot.propTypes = {
-  tiles: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+  initialTiles: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
   actions: PropTypes.arrayOf(PropTypes.object),
 };
 
 MartianRobot.defaultProps = {
-  tiles: [],
+  initialTiles: [],
   actions: [],
 };
 

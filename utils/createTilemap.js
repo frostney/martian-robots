@@ -1,4 +1,4 @@
-const { EMPTY, NONE } = require('./constants');
+const { EMPTY, NONE } = require('../constants');
 
 const createTilemap = (width, height) => {
   return [
