@@ -12,7 +12,7 @@ const Sidebar = importJsx('./components/Sidebar.jsx');
 const { useEffect, useState } = React;
 
 const MartianRobot = ({ tiles, actions }) => {
-  const [robotPos, setRobotPos] = useState({});
+  const [robots, setRobots] = useState({});
   const [command, setCommand] = useState('');
   // console.log(robots);
 
@@ -20,7 +20,7 @@ const MartianRobot = ({ tiles, actions }) => {
     actions.forEach((action, j) => {
       setTimeout(() => {
         setCommand(`${action.type} - ${action.payload}`);
-        setRobotPos((currentValue) => ({
+        setRobots((currentValue) => ({
           ...currentValue,
           [action.count]: updateRobot(currentValue[action.count], action),
         }));
@@ -31,7 +31,7 @@ const MartianRobot = ({ tiles, actions }) => {
   return (
     <Box>
       <Tilemap tiles={tiles} />
-      <Sidebar command={command} output={robotPos} />
+      <Sidebar command={command} robots={robots} />
     </Box>
   );
 };

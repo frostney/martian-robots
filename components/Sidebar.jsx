@@ -5,14 +5,14 @@ const { Box, Text } = require('ink');
 
 const abbreviateDirection = (direction) => direction[0];
 
-const Sidebar = ({ command, output }) => {
+const Sidebar = ({ command, robots }) => {
   return (
     <Box borderStyle="round" flexDirection="column">
       <Text> Current command </Text>
       <Text> {command} </Text>
       <Text> ----</Text>
       <Text> Output</Text>
-      {Object.values(output).map(({ x, y, direction }, index) => (
+      {Object.values(robots).map(({ x, y, direction }, index) => (
         <Text key={`robot-${index}`}>
           {x} {y} {abbreviateDirection(direction)}
         </Text>
@@ -23,12 +23,12 @@ const Sidebar = ({ command, output }) => {
 
 Sidebar.propTypes = {
   command: PropTypes.string,
-  output: PropTypes.objectOf(PropTypes.object),
+  robots: PropTypes.objectOf(PropTypes.object),
 };
 
 Sidebar.defaultProps = {
   command: '',
-  output: {},
+  robots: {},
 };
 
 module.exports = Sidebar;
