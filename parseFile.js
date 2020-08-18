@@ -1,6 +1,27 @@
 const { GRID_MAX_WIDTH, GRID_MAX_HEIGHT } = require('./constants');
 
-const splitCoordinate = (coordinate) => coordinate.split(' ');
+const splitCoordinate = (coordinate) =>
+  coordinate.split(' ').map((str) => parseInt(str, 10) || 0);
+const splitCoordinateWithDirection = (coordinateAndDirection) => {
+  const coordinateArray = coordinateAndDirection.split(' ');
+
+  const x = parseInt(coordinateArray[0], 10) || 0;
+  const y = parseInt(coordinateArray[1], 10) || 0;
+  const direction = (() => {
+    switch (coordinateArray[2]) {
+      case 'N':
+        return 'NORTH';
+      case 'W':
+        return 'WEST';
+      case 'E':
+        return 'EAST';
+      default:
+        return 'SOUTH';
+    }
+  })();
+
+  return [x, y, direction];
+};
 
 const parseFile = (content) => {
   const lines = content.split('\n');
@@ -20,7 +41,7 @@ const parseFile = (content) => {
   lines.shift();
 
   for (let i = 0; i < lines.length - 1; i += 2) {
-    const [x, y, direction] = splitCoordinate(lines[i]);
+    const [x, y, direction] = splitCoordinateWithDirection(lines[i]);
     const actions = lines[i + 1]
       .split('')
       .map((action) => {
