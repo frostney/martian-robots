@@ -1,31 +1,53 @@
-const { ROTATE, MOVE, SET_ROBOT } = require('../constants');
+const {
+  SET_ROBOT,
+  MOVE,
+  FORWARD,
+  NORTH,
+  SOUTH,
+  WEST,
+  EAST,
+} = require('../constants');
+const { cloneTilemap } = require('../utils');
 
-const modifyTilemap = ({ tiles, currentRobot }, action) => {
+const updateTilemap = (tiles, action) => {
   switch (action.type) {
-    case ROTATE:
-      return {
-        tiles,
-        currentRobot,
-      };
+    case SET_ROBOT: {
+      const clonedTiles = cloneTilemap(tiles);
 
-    case MOVE:
-      return {
-        tiles,
-        currentRobot,
-      };
+      const { x, y, direction, command } = action.payload;
 
-    case SET_ROBOT:
-      return {
-        tiles,
-        currentRobot,
-      };
+      try {
+        clonedTiles[x][y].robot = direction;
+
+        if (command.type === MOVE) {
+          if (command.payload === FORWARD) {
+            if (direction === NORTH) {
+              clonedTiles[x][y - 1].robot = 'NONE';
+            }
+
+            if (direction === SOUTH) {
+              clonedTiles[x][y + 1].robot = 'NONE';
+            }
+
+            if (direction === WEST) {
+              clonedTiles[x + 1][y].robot = 'NONE';
+            }
+
+            if (direction === EAST) {
+              clonedTiles[x - 1][y].robot = 'NONE';
+            }
+          }
+        }
+      } catch (err) {
+        console.info('Robot out of bounds.');
+      }
+
+      return clonedTiles;
+    }
 
     default:
-      return {
-        tiles,
-        currentRobot,
-      };
+      return tiles;
   }
 };
 
-module.exports = modifyTilemap;
+module.exports = updateTilemap;

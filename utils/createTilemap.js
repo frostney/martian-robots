@@ -2,8 +2,8 @@ const { EMPTY, NONE } = require('../constants');
 
 const createTilemap = (width, height) => {
   return [
-    ...Array(width).fill([
-      ...Array(height).fill({
+    ...Array(height).fill([
+      ...Array(width).fill({
         background: EMPTY,
         robot: NONE,
       }),

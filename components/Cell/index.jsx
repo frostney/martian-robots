@@ -7,19 +7,20 @@ const Robot = importJsx('./Robot.jsx');
 const Scent = importJsx('./Scent.jsx');
 const Default = importJsx('./Default.jsx');
 
-const Cell = ({ type, x, y, direction }) => {
+const Cell = ({ data, x, y }) => {
   let content = null;
 
-  switch (type) {
-    case 'scent':
-      content = <Scent />;
-      break;
-    case 'robot':
-      content = <Robot direction={direction} />;
-      break;
-    default:
-      content = <Default x={x} y={y} />;
-      break;
+  if (data.robot === 'NONE') {
+    switch (data.background) {
+      case 'SCENT':
+        content = <Scent />;
+        break;
+      default:
+        content = <Default x={x} y={y} />;
+        break;
+    }
+  } else {
+    content = <Robot direction={data.robot} />;
   }
 
   return (
@@ -30,17 +31,18 @@ const Cell = ({ type, x, y, direction }) => {
 };
 
 Cell.propTypes = {
-  type: PropTypes.oneOf(['scent', 'robot', 'default']),
+  data: PropTypes.shape({
+    background: PropTypes.oneOf(['EMPTY', 'SCENT']),
+    robot: PropTypes.oneOf(['NONE', 'NORTH', 'SOUTH', 'WEST', 'EAST']),
+  }),
   x: PropTypes.number,
   y: PropTypes.number,
-  direction: PropTypes.string,
 };
 
 Cell.defaultProps = {
-  type: 'default',
+  data: {},
   x: 0,
   y: 0,
-  direction: '',
 };
 
 module.exports = Cell;

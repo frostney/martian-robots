@@ -1,19 +1,35 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const { Text } = require('ink');
+const { Text, Box } = require('ink');
 
 const { NORTH, SOUTH, EAST, WEST } = require('../../constants');
 
 const Robot = ({ direction }) => {
   switch (direction) {
     case NORTH:
-      return <Text> ↑ </Text>;
+      return (
+        <Box marginLeft={1} marginRight={1}>
+          <Text> ↑ </Text>
+        </Box>
+      );
     case SOUTH:
-      return <Text> ↓ </Text>;
+      return (
+        <Box marginLeft={1} marginRight={1}>
+          <Text> ↓ </Text>
+        </Box>
+      );
     case EAST:
-      return <Text> → </Text>;
+      return (
+        <Box marginLeft={1} marginRight={1}>
+          <Text> → </Text>
+        </Box>
+      );
     case WEST:
-      return <Text> ← </Text>;
+      return (
+        <Box marginLeft={1} marginRight={1}>
+          <Text> ← </Text>
+        </Box>
+      );
     default:
       return null;
   }

@@ -13,7 +13,7 @@ const Tilemap = ({ tiles }) => {
         return (
           <Box key={`row-${x}`}>
             {row.map((data, y) => {
-              return <Cell key={`x${x}-y${y}`} x={x} y={y} type={data} />;
+              return <Cell key={`x${x}-y${y}`} x={x} y={y} data={data} />;
             })}
           </Box>
         );

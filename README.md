@@ -24,6 +24,11 @@ Then run `yarn start` to run the simulation. It uses `sample.txt` by default, bu
 - I wish I had the project setup as a generator
 - The pre-commit hooks and commitlint, it made sure I wouldn't use any shortcuts in implementation which was a blessing and a curse
 
+## Known issues
+
+- Direction of the robot in the visualisation isn't accurate
+- Missing LOST and SCENT logic
+
 ## Things to improve on
 
 - Interactive mode for inputting the path

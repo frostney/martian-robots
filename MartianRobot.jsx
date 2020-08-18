@@ -3,8 +3,8 @@ const PropTypes = require('prop-types');
 const { Box } = require('ink');
 const importJsx = require('import-jsx');
 
-const { DELAY } = require('./constants');
-const { updateRobot } = require('./reducers');
+const { DELAY, SET_ROBOT } = require('./constants');
+const { updateRobot, updateTilemap } = require('./reducers');
 
 const Tilemap = importJsx('./components/Tilemap.jsx');
 const Sidebar = importJsx('./components/Sidebar.jsx');
@@ -15,20 +15,30 @@ const MartianRobot = ({ initialTiles, actions }) => {
   const [robots, setRobots] = useState({});
   const [command, setCommand] = useState('');
   const [tiles, setTiles] = useState(initialTiles);
-  // console.log(robots);
 
   useEffect(() => {
     actions.forEach((action, j) => {
       setTimeout(() => {
-        setCommand(`${action.type} - ${action.payload}`);
+        setCommand(action);
+
         setRobots((currentValue) => ({
           ...currentValue,
           [action.count]: updateRobot(currentValue[action.count], action),
         }));
-        setTiles(tiles);
       }, DELAY * j);
     });
   }, []);
+
+  useEffect(() => {
+    Object.values(robots).forEach((payload) => {
+      setTiles((currentValue) =>
+        updateTilemap(currentValue, {
+          type: SET_ROBOT,
+          payload: { ...payload, command },
+        }),
+      );
+    });
+  }, [robots, command]);
 
   return (
     <Box>

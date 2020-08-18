@@ -9,7 +9,7 @@ const Sidebar = ({ command, robots }) => {
   return (
     <Box borderStyle="round" flexDirection="column">
       <Text> Current command </Text>
-      <Text> {command} </Text>
+      <Text> {`${command.type} - ${command.payload}`} </Text>
       <Text> ----</Text>
       <Text> Output</Text>
       {Object.values(robots).map(({ x, y, direction }, index) => (
@@ -22,12 +22,13 @@ const Sidebar = ({ command, robots }) => {
 };
 
 Sidebar.propTypes = {
-  command: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  command: PropTypes.shape({ type: PropTypes.string, payload: PropTypes.any }),
   robots: PropTypes.objectOf(PropTypes.object),
 };
 
 Sidebar.defaultProps = {
-  command: '',
+  command: {},
   robots: {},
 };
 
