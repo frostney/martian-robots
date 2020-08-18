@@ -1,2 +1,4 @@
-exports.GRID_WIDTH_MAX = 50;
-exports.GRID_HEIGHT_MAX = 50;
+const grid = require('./grid');
+const robot = require('./robot');
+
+module.exports = { ...grid, ...robot };
