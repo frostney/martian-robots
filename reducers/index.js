@@ -1,5 +1,5 @@
 const modifyTilemap = require('./modifyTilemap');
-const updateCurrentRobot = require('./updateCurrentRobot');
+const updateRobot = require('./updateRobot');
 
 exports.modifyTilemap = modifyTilemap;
-exports.updateCurrentRobot = updateCurrentRobot;
+exports.updateRobot = updateRobot;

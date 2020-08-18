@@ -17,7 +17,7 @@ const arg = process.argv[2];
 let filename;
 
 let tiles = [];
-let robots = [];
+let actions = [];
 let timeout = DELAY * 5;
 
 if (!arg) {
@@ -29,9 +29,9 @@ try {
 
   const parsedFile = parseFile(content);
   const { gridWidth, gridHeight } = parsedFile;
-  robots = parsedFile.robots;
+  actions = parsedFile.actions;
   tiles = createTilemap(gridWidth, gridHeight);
-  timeout = robots.length * DELAY;
+  timeout = actions.length * DELAY;
 } catch (err) {
   console.error(`Cannot read file: ${err}`);
 }
@@ -45,7 +45,7 @@ const App = () => {
     }, timeout);
   }, []);
 
-  return <MartianRobot tiles={tiles} robots={robots} />;
+  return <MartianRobot tiles={tiles} actions={actions} />;
 };
 
 render(<App />);

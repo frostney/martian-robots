@@ -39,7 +39,7 @@ const parseFile = (content) => {
   const lines = content.split('\n');
 
   const [gridWidth, gridHeight] = splitCoordinate(lines[0]);
-  const robots = [];
+  const actions = [];
 
   if (gridWidth > GRID_MAX_WIDTH) {
     throw new Error(`Grid width ${gridWidth} is higher than maximum.`);
@@ -55,13 +55,13 @@ const parseFile = (content) => {
   for (let i = 0; i < lines.length - 1; i += 2) {
     const count = i / 2;
     const [x, y, direction] = splitCoordinateWithDirection(lines[i]);
-    robots.push({
+    actions.push({
       type: 'SET_ROBOT',
       payload: [x, y, direction],
       count,
     });
 
-    const actions = lines[i + 1]
+    const instructions = lines[i + 1]
       .split('')
       .map((action) => {
         switch (action) {
@@ -81,13 +81,13 @@ const parseFile = (content) => {
       })
       .filter((item) => item);
 
-    robots.push(...actions);
+    actions.push(...instructions);
   }
 
   return {
     gridWidth,
     gridHeight,
-    robots,
+    actions,
     robotCount: lines.length / 2,
   };
 };
