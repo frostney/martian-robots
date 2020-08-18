@@ -8,6 +8,8 @@ const {
   LEFT,
   RIGHT,
   FORWARD,
+  MOVE,
+  ROTATE,
 } = require('./constants');
 
 const splitCoordinate = (coordinate) =>
@@ -57,11 +59,14 @@ const parseFile = (content) => {
       .map((action) => {
         switch (action) {
           case 'L':
-            return LEFT;
+            return {
+              type: ROTATE,
+              payload: LEFT,
+            };
           case 'R':
-            return RIGHT;
+            return { type: ROTATE, payload: RIGHT };
           case 'F':
-            return FORWARD;
+            return { type: MOVE, payload: FORWARD };
           default:
             return '';
         }
